@@ -1037,10 +1037,7 @@
 
 <body>
     <div id="unique-bg"></div>
-
-    <canvas id="starfield-canvas"></canvas>
-    <canvas id="particle-canvas"></canvas>
-    <div class="aurora"></div>
+    <!-- Unique dark background only, removed bubbles and canvas backgrounds -->
 
     <nav class="navbar">
         <div class="logo">Portfolio</div>
@@ -1055,12 +1052,7 @@
     </nav>
 
     <section class="hero">
-        <div class="floating-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
-        <div class="magic-orb"></div>
+        <!-- Removed floating shapes and magic orb for a cleaner dark background -->
         <div class="hero-content scroll-animate">
             <h1>Yaswanth Amjuri</h1>
             <p>Creative Developer & Digital Artist</p>
@@ -1419,107 +1411,7 @@
 
 
         // Starfield animation
-        (() => {
-            const canvas = document.getElementById('starfield-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let stars = [];
-
-            function resize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                stars = Array.from({
-                    length: 80
-                }, () => ({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 1.2 + 0.2,
-                    opacity: Math.random() * 0.7 + 0.2,
-                    theta: Math.random() * Math.PI * 2,
-                    color: `hsl(${Math.random() * 360}, 100%, 85%)`
-                }));
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                stars.forEach(star => {
-                    ctx.save();
-                    ctx.globalAlpha = star.opacity + 0.2 * Math.sin(Date.now() / 700 + star.theta);
-                    ctx.beginPath();
-                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = star.color;
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = star.color;
-                    ctx.fill();
-                    ctx.restore();
-                });
-                requestAnimationFrame(animate);
-            }
-            window.addEventListener('resize', resize);
-            resize();
-            animate();
-        })();
-
-        // Particle animation
-        (() => {
-            const canvas = document.getElementById('particle-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-
-            function resize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-
-            function init() {
-                particles = Array.from({
-                    length: 30
-                }, () => ({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.7,
-                    vy: (Math.random() - 0.5) * 0.7,
-                    size: Math.random() * 4 + 1,
-                    color: `hsl(${Math.random() * 360}, 80%, 60%)`
-                }));
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach((p1, i) => {
-                    p1.x += p1.vx;
-                    p1.y += p1.vy;
-                    if (p1.x < 0 || p1.x > canvas.width) p1.vx *= -1;
-                    if (p1.y < 0 || p1.y > canvas.height) p1.vy *= -1;
-                    ctx.beginPath();
-                    ctx.arc(p1.x, p1.y, p1.size, 0, Math.PI * 2);
-                    ctx.fillStyle = p1.color;
-                    ctx.fill();
-
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const p2 = particles[j];
-                        const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-                        if (dist < 100) {
-                            ctx.beginPath();
-                            ctx.strokeStyle = `hsla(${(p1.size * 30) % 360}, 100%, 80%, ${1 - dist / 100})`;
-                            ctx.lineWidth = 0.7;
-                            ctx.moveTo(p1.x, p1.y);
-                            ctx.lineTo(p2.x, p2.y);
-                            ctx.stroke();
-                        }
-                    }
-                });
-                requestAnimationFrame(animate);
-            }
-            window.addEventListener('resize', () => {
-                resize();
-                init();
-            });
-            resize();
-            init();
-            animate();
-        })();
+        // Removed starfield and particle animation for a unique dark background
 
         // Smooth scroll
         function scrollToSection(id) {
